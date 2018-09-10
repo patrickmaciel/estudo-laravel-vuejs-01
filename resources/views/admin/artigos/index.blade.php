@@ -3,6 +3,8 @@
 @section('content')
     <pagina tamanho="10">
         <painel titulo="Lista de Artigos">
+            <migalhas :lista="{{$listaMigalhas}}"></migalhas>
+
             <tabela-lista
                 criar="{{ route('artigos.create') }}"
                 editar="#editar"

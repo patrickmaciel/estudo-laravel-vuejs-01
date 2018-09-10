@@ -23,6 +23,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $listaMigalhas = json_encode([
+            ['titulo' => 'Home', 'link' => route('home')],
+            ['titulo' => 'Lista Artigos']
+        ]);
+
+        return view('home'
+            ,compact('listaMigalhas'));
     }
 }

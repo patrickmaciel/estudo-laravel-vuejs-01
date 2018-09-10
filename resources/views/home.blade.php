@@ -3,6 +3,8 @@
 @section('content')
     <pagina tamanho="10">
         <painel titulo="Dashboard">
+            <migalhas :lista="{{$listaMigalhas}}"></migalhas>
+
             <div class="row">
                 <div class="col">
                     <caixa qtd="58" titulo="Artigos" url="{{ route('artigos.index') }}" cor="green" icone="fa fa-book"></caixa>
