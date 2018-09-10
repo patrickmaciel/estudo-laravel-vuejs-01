@@ -13907,6 +13907,7 @@ Vue.component('topo', __webpack_require__(48));
 Vue.component('painel', __webpack_require__(51));
 Vue.component('caixa', __webpack_require__(58));
 Vue.component('pagina', __webpack_require__(63));
+Vue.component('tabela-lista', __webpack_require__(66));
 
 var app = new Vue({
   el: '#app'
@@ -48208,6 +48209,396 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-706ada9e", module.exports)
   }
 }
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(69)
+}
+var normalizeComponent = __webpack_require__(40)
+/* script */
+var __vue_script__ = __webpack_require__(67)
+/* template */
+var __vue_template__ = __webpack_require__(68)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/TabelaLista.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1d289183", Component.options)
+  } else {
+    hotAPI.reload("data-v-1d289183", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 67 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['criar', 'editar', 'deletar', 'detalhe', 'token', 'titulos', 'itens', 'ordem', 'ordemCol'],
+    data: function data() {
+        return {
+            buscar: '',
+            ordemAux: this.ordem || 'asc',
+            ordemAuxCol: this.ordemCol || 0
+        };
+    },
+    methods: {
+        executaForm: function executaForm(index) {
+            document.getElementById(index).submit();
+        },
+        ordenaColuna: function ordenaColuna(coluna) {
+            this.ordemAuxCol = coluna;
+            if (this.ordemAux.toLowerCase() == 'asc') {
+                this.ordemAux = 'desc';
+            } else {
+                this.ordemAux = 'asc';
+            }
+        }
+    },
+    computed: {
+        lista: function lista() {
+            var _this = this;
+
+            var ordem = this.ordemAux;
+            var ordemCol = this.ordemAuxCol;
+
+            ordem = ordem.toLowerCase();
+            ordemCol = parseInt(ordemCol);
+
+            if (ordem == 'asc') {
+                this.itens.sort(function (a, b) {
+                    if (a[ordemCol] > b[ordemCol]) {
+                        return 1;
+                    } else if (a[ordemCol] < b[ordemCol]) {
+                        return -1;
+                    }
+                    return 0;
+                });
+            } else {
+                this.itens.sort(function (a, b) {
+                    if (a[ordemCol] < b[ordemCol]) {
+                        return 1;
+                    } else if (a[ordemCol] > b[ordemCol]) {
+                        return -1;
+                    }
+                    return 0;
+                });
+            }
+
+            return this.itens.filter(function (res) {
+                for (var k = 0; k < res.length; k++) {
+                    if ((res[k] + '').toLowerCase().indexOf(_this.buscar.toLowerCase()) >= 0) {
+                        return true;
+                    }
+                }
+
+                return false;
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 68 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      { staticClass: "form-inline justify-content-between no-gutters" },
+      [
+        _c("div", { staticClass: "col-6" }, [
+          _vm.criar
+            ? _c(
+                "a",
+                { staticClass: "btn btn-primary", attrs: { href: _vm.criar } },
+                [_vm._v("Criar")]
+              )
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c(
+          "form",
+          { staticClass: "col-3", attrs: { action: "#", method: "GET" } },
+          [
+            _c("div", { staticClass: "input-group mb-3" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.buscar,
+                    expression: "buscar"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", placeholder: "Digite aqui" },
+                domProps: { value: _vm.buscar },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.buscar = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm._m(0)
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c("table", { staticClass: "vue-table table table-striped table-hover" }, [
+      _c("thead", [
+        _c(
+          "tr",
+          [
+            _vm._l(_vm.titulos, function(titulo, index) {
+              return _c(
+                "th",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.ordenaColuna(index)
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(titulo))]
+              )
+            }),
+            _vm._v(" "),
+            _vm.detalhe || _vm.editar || _vm.deletar
+              ? _c("th", [_vm._v("Ação")])
+              : _vm._e()
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.lista, function(row, index) {
+          return _c(
+            "tr",
+            [
+              _vm._l(row, function(value) {
+                return _c("td", [_vm._v(_vm._s(value))])
+              }),
+              _vm._v(" "),
+              _vm.detalhe || _vm.editar || _vm.deletar
+                ? _c("td", [
+                    _vm.deletar && _vm.token
+                      ? _c(
+                          "form",
+                          {
+                            attrs: {
+                              id: index,
+                              action: _vm.deletar,
+                              method: "POST"
+                            }
+                          },
+                          [
+                            _c("input", {
+                              attrs: { type: "hidden", name: "_token" },
+                              domProps: { value: _vm.token }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: {
+                                type: "hidden",
+                                name: "_method",
+                                value: "DELETE"
+                              }
+                            })
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.detalhe
+                      ? _c("a", { attrs: { href: _vm.detalhe } }, [
+                          _vm._v("Ver |")
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.editar
+                      ? _c("a", { attrs: { href: _vm.editar } }, [
+                          _vm._v("Editar |")
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.deletar && _vm.token
+                      ? _c(
+                          "a",
+                          {
+                            attrs: { href: _vm.deletar },
+                            on: {
+                              click: function($event) {
+                                _vm.executaForm(index)
+                              }
+                            }
+                          },
+                          [_vm._v("Excluir")]
+                        )
+                      : _vm._e()
+                  ])
+                : _vm._e()
+            ],
+            2
+          )
+        })
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-outline-secondary", attrs: { type: "button" } },
+        [_vm._v("Buscar")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1d289183", module.exports)
+  }
+}
+
+/***/ }),
+/* 69 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(70);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(56)("723216b6", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1d289183\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TabelaLista.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-1d289183\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./TabelaLista.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 70 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(45)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.vue-table tr th {\n    cursor: pointer;\n}\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);

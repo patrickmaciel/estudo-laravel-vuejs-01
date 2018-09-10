@@ -5,7 +5,7 @@
         <painel titulo="Dashboard">
             <div class="row">
                 <div class="col">
-                    <caixa qtd="58" titulo="Visitas" url="http://www.google.com" cor="green" icone="fa fa-code"></caixa>
+                    <caixa qtd="58" titulo="Artigos" url="{{ route('artigos.index') }}" cor="green" icone="fa fa-book"></caixa>
                 </div>
 
                 <div class="col">
