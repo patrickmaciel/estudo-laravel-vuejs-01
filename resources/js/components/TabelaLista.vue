@@ -2,7 +2,8 @@
     <div>
         <div class="form-inline justify-content-between no-gutters">
             <div class="col-6">
-                <modal-link v-if="criar" tipo="link" classe="btn-info" titulo="Criar" nome="#artigo-modal"></modal-link>
+                <a v-if="criar && !modal" :href="criar" class="btn btn-primary">Criar</a>
+                <modal-link v-if="criar && modal" tipo="link" classe="" titulo="Criar" nome="#modal-adicionar"></modal-link>
             </div>
 
             <form action="#" class="col-3" method="GET">
@@ -33,32 +34,17 @@
                         <input type="hidden" name="_method" value="DELETE">
                     </form>
 
-                    <a v-if="detalhe" :href="detalhe">Ver |</a>
-                    <a v-if="editar" :href="editar">Editar |</a>
+                    <a v-if="detalhe && !modal" :href="detalhe">Detalhe |</a>
+                    <modal-link v-if="detalhe && modal" :item="row" tipo="link" classe="" titulo="Detalhe |" nome="#modal-detalhe"></modal-link>
+
+                    <a v-if="editar && !modal" :href="editar">Editar |</a>
+                    <modal-link v-if="editar && modal" :item="row" tipo="link" classe="" titulo="Editar |" nome="#modal-editar"></modal-link>
+
                     <a v-if="deletar && token" :href="deletar" v-on:click="executaForm(index)">Excluir</a>
                 </td>
             </tr>
             </tbody>
         </table>
-
-        <modal nome="artigo-modal">
-            <form>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                </div>
-                <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-        </modal>
     </div>
 </template>
 
@@ -73,7 +59,8 @@
             'titulos',
             'itens',
             'ordem',
-            'ordemCol'
+            'ordemCol',
+            'modal'
         ],
         data: function() {
           return {
@@ -105,33 +92,37 @@
 
                 if (ordem == 'asc') {
                     this.itens.sort(function(a, b) {
-                        if (a[ordemCol] > b[ordemCol]) {
+                        if (Object.values(a)[ordemCol] > Object.values(b)[ordemCol]) {
                             return 1;
-                        } else if (a[ordemCol] < b[ordemCol]) {
+                        } else if (Object.values(a)[ordemCol] < Object.values(b)[ordemCol]) {
                             return -1;
                         }
                         return 0;
                     });
                 } else {
                     this.itens.sort(function(a, b) {
-                        if (a[ordemCol] < b[ordemCol]) {
+                        if (Object.values(a)[ordemCol] < Object.values(b)[ordemCol]) {
                             return 1;
-                        } else if (a[ordemCol] > b[ordemCol]) {
+                        } else if (Object.values(a)[ordemCol] > Object.values(b)[ordemCol]) {
                             return -1;
                         }
                         return 0;
                     });
                 }
 
-                return this.itens.filter(res => {
-                    for (let k = 0; k < res.length; k++) {
-                        if ((res[k] + '').toLowerCase().indexOf(this.buscar.toLowerCase()) >= 0) {
-                            return true;
+                if (this.buscar) {
+                    return this.itens.filter(res => {
+                        for (let k = 0; k < res.length; k++) {
+                            if ((res[k] + '').toLowerCase().indexOf(this.buscar.toLowerCase()) >= 0) {
+                                return true;
+                            }
                         }
-                    }
 
-                    return false;
-                });
+                        return false;
+                    });
+                }
+
+                return this.itens;
             }
         }
     }

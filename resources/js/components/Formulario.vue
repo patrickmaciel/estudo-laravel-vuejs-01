@@ -1,7 +1,7 @@
 <template>
-    <form :action="action" :class="classe || 'form'" :method="method" :enctype="encytpe || 'multipart/form-data'" :style="style">
-        <input v-if="method != 'post' && method != 'get'" type="hidden" name="_token" value="">
-        <input type="hidden" name="_method" value="">
+    <form :action="action" :class="classe || 'form'" :method="defineMethod" :enctype="encytpe || 'multipart/form-data'" :styles="styles">
+        <input type="hidden" name="_token" :value="token">
+        <input v-if="alterMethod" type="hidden" name="_method" :value="alterMethod">
 
         <slot></slot>
     </form>
@@ -11,12 +11,30 @@
     export default {
         props: [
             'action',
-            'class',
+            'classe',
             'method',
             'encytpe',
-            'style',
+            'styles',
             'token'
-        ]
+        ],
+        data: function() {
+            return {
+                alterMethod: ""
+            }
+        },
+        computed: {
+            defineMethod: function() {
+                if (this.method.toLowerCase() == 'post' || this.method.toLowerCase() == 'get') {
+                    return this.method.toLowerCase();
+                } else if (this.method.toLowerCase() == 'put') {
+                    this.alterMethod = 'put';
+                } else if (this.method.toLowerCase() == 'put') {
+                    this.alterMethod = 'delete';
+                }
+
+                return "post";
+            }
+        }
     }
 </script>
 

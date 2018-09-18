@@ -19,8 +19,14 @@ class ArtigosController extends Controller
           ['titulo' => 'Lista Artigos']
         ]);
 
+        $listaArtigos = json_encode([
+           ['id' => 1, 'titulo' => 'Home', 'descricao' => 'Página Inicial'],
+           ['id' => 2, 'titulo' => 'PHP', 'descricao' => 'É melhor que java'],
+           ['id' => 3, 'titulo' => 'Angular', 'descricao' => 'É uma bosta'],
+        ]);
+
         return view('admin.artigos.index',
-            compact('listaMigalhas'));
+            compact('listaMigalhas', 'listaArtigos'));
     }
 
     /**
