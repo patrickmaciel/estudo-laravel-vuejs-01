@@ -14,4 +14,10 @@ class Artigo extends Model
     protected $fillable = ['titulo', 'descricao', 'conteudo', 'data'];
 
     protected $dates = ['deleted_at'];
+
+    public static function buscaParaTabela()
+    {
+        return static::select('id', 'titulo', 'descricao', 'data')
+            ->get();
+    }
 }

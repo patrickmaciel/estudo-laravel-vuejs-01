@@ -12,7 +12,7 @@
                 detalhe="#detalhe"
                 ordem="asc" ordemCol="2"
                 token="{{ csrf_token() }}"
-                :titulos="['#', 'Título', 'Descrição']"
+                :titulos="['#', 'Título', 'Descrição', 'Data']"
                 :itens="{{ $listaArtigos }}"
                 modal="sim"
             ></tabela-lista>
@@ -20,17 +20,27 @@
     </pagina>
 
     <modal nome="modal-adicionar" titulo="Adicionar">
-        <formulario id="form-adicionar" classe="" action="#" method="put" encytpe="" token="{{ csrf_token() }}">
+        <formulario id="form-adicionar" classe="" action="{{ route('artigos.store') }}" method="post" encytpe="" token="{{ csrf_token() }}">
             <div class="form-group">
                 <label for="titulo">Título</label>
-                <input type="text" class="form-control" id="titulo" aria-describedby="tituloHelp" placeholder="Digite o título">
+                <input type="text" class="form-control" id="titulo" name="titulo" aria-describedby="tituloHelp" placeholder="Digite o título">
                 <small id="tituloHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
 
             <div class="form-group">
                 <label for="descricao">Descrição</label>
-                <input type="text" class="form-control" id="descricao" aria-describedby="descricaoHelp" placeholder="Digite a Descrição">
+                <input type="text" class="form-control" id="descricao" name="descricao" aria-describedby="descricaoHelp" placeholder="Digite a Descrição">
                 <small id="descricaoHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+
+            <div class="form-group">
+                <label for="conteudo">Conteúdo</label>
+                <textarea class="form-control" name="conteudo" id="conteudo" cols="30" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="data">Data</label>
+                <input type="datetime-local" id="data" class="form-control" name="data">
             </div>
         </formulario>
 
