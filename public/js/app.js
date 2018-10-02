@@ -49505,7 +49505,7 @@ var render = function() {
                             {
                               attrs: {
                                 id: index,
-                                action: _vm.deletar,
+                                action: _vm.deletar + row.id,
                                 method: "POST"
                               }
                             },
@@ -49568,7 +49568,7 @@ var render = function() {
                         ? _c(
                             "a",
                             {
-                              attrs: { href: _vm.deletar },
+                              attrs: { href: "#" },
                               on: {
                                 click: function($event) {
                                   _vm.executaForm(index)
