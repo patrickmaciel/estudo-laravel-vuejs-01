@@ -49536,6 +49536,7 @@ var render = function() {
                         ? _c("modal-link", {
                             attrs: {
                               item: row,
+                              url: _vm.detalhe,
                               tipo: "link",
                               classe: "",
                               titulo: "Detalhe |",
@@ -49554,6 +49555,7 @@ var render = function() {
                         ? _c("modal-link", {
                             attrs: {
                               item: row,
+                              url: _vm.editar,
                               tipo: "link",
                               classe: "",
                               titulo: "Editar |",
@@ -50065,7 +50067,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -50111,10 +50113,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['nome', 'tipo', 'titulo', 'classe', 'item'],
+    props: ['nome', 'tipo', 'titulo', 'classe', 'item', 'url'],
     methods: {
         preencheFormulario: function preencheFormulario() {
-            this.$store.commit('setItem', this.item);
+            var _this = this;
+
+            axios.get(this.url + this.item.id).then(function (res) {
+                _this.$store.commit('setItem', res.data);
+            });
+            // this.$store.commit('setItem', this.item);
         }
     }
 });

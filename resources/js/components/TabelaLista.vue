@@ -35,10 +35,10 @@
                     </form>
 
                     <a v-if="detalhe && !modal" :href="detalhe">Detalhe |</a>
-                    <modal-link v-if="detalhe && modal" :item="row" tipo="link" classe="" titulo="Detalhe |" nome="#modal-detalhe"></modal-link>
+                    <modal-link v-if="detalhe && modal" :item="row" :url="detalhe" tipo="link" classe="" titulo="Detalhe |" nome="#modal-detalhe"></modal-link>
 
                     <a v-if="editar && !modal" :href="editar">Editar |</a>
-                    <modal-link v-if="editar && modal" :item="row" tipo="link" classe="" titulo="Editar |" nome="#modal-editar"></modal-link>
+                    <modal-link v-if="editar && modal" :item="row" :url="editar" tipo="link" classe="" titulo="Editar |" nome="#modal-editar"></modal-link>
 
                     <a v-if="deletar && token" :href="deletar" v-on:click="executaForm(index)">Excluir</a>
                 </td>

@@ -63,7 +63,7 @@ class ArtigosController extends Controller
      */
     public function show($id)
     {
-        //
+        return Artigo::find($id);
     }
 
     /**
@@ -84,9 +84,10 @@ class ArtigosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ArtigoStoreFormRequest $request, $id)
     {
-        //
+        Artigo::find($id)->update($request->all());
+        return redirect()->back();
     }
 
     /**
